@@ -1,0 +1,114 @@
+
+
+HEllO WORLD!!!!!!
+
+
+-- 1st set
+
+cps(0.5)
+
+d9 $ slow 1
+   $ sound "808:2*4"
+   # speed "1"
+
+d1 $ slow 4
+   $ fastcat [
+   sound "pm_drums:7*4",
+   sound "pm_drums:7*8"
+   ]
+   # gain "1.2 1.4 1.2 1.2"
+   # speed "0.7"
+
+d2 $ slow 4
+   $ fastcat [
+   sound "808:7*2 ~ ~ 808:7*8 [pm_fx:4]/3",
+   sound "808:7*2 ~ 808:7*4 808:7*4",
+   sound "808:7*2 ~ 808:7*4 808:7*2 808:7*2",
+   sound "808:7*2 ~ ~ 808:7*8 [pm_fx:4]/3",
+   sound "808:7*2 ~ 808:7*4 808:7*4",
+   sound "808:7*2 ~ 808:7*4 808:7*2 808:7*2",
+   sound "808:7*2 ~ 808:7*4 808:7*2 808:7*2",
+   ]
+   # gain "1.8"
+   # speed "1.3"
+   # sustain "0.4 0.2"
+
+d3 $ juxBy 0.1 (|*| speed "2")
+   $ loopAt "<4 6 2 3>"
+   $ chop 8
+   $ sound "pm_fx:7"
+   # gain 1.5
+   # speed "1 1.5 1.8 1.2"
+
+d4 $ slow 2.5
+   $ sound "pm_drums:5*8"
+   # gain "1.4"
+   # speed "1 1.5 1.8 1.2"
+
+d5 $ slow 4
+    $ chop 6
+    $ fastcat [
+      sound "pm_fx:4*4" # vowel "[u e o a u]/3",
+      sound "pm_fx:1*4" # speed "1 1.5 1.8 1.2"
+      ]
+
+d5 $ sound (samples "hc*8" (iter 4 $ run 4))
+t5 anticipate $ sound (samples "bd(3,8)" (run 3))
+
+hush
+
+
+
+
+d4 silence
+
+d1 $ chop 5
+   $ sound "bd*2 sn:4*2"
+
+d1 $ chop 10
+   $ sound "bd*4 sn:6*2"
+
+d2 $ juxBy 0.4 (|*| speed "4")
+   $ loopAt "<4 6 2 3>"
+   $ chop 2
+   $ sound "fm:14"
+
+d3 $ juxBy 0.1 (|*| speed "20")
+   $ loopAt "<4 6 2 3>"
+   $ chop 100
+   $ sound "pm:3*2"
+
+d4 $ chop 10
+   $ trunc "<0.75 0.25 2>"
+   $ sound "pm:1*4 2"
+
+hush
+
+
+\
+-- d4 $ sound "sn*32"
+--    # pan sine
+--    silence
+
+d2 $s "pm*1 [arpy]" # speed ((*1) <$> sine)
+
+d3 $s "pm_drums [pm:2 [bd bd bd bd]]"
+ # speed ((*0.2) <$> sine)
+
+d4 $ palindrome $ sound "arpy:0 arpy:2 arpy:2 arpy:3"
+
+d5 $ sound "bd*2 [bd [sn sn*1/5 sn sn] sn]"
+
+d6 $s "sn" # up (rand*14) # speed ((*5) <$> sine)
+
+d1 silence
+
+d4 silence
+
+d6 silence
+
+hush
+
+-- ServerOptions.new.outDevice =  "Soundflower (2ch)";
+-- active for command Super Collider "SuperDirt.start"
+-- Quarks.gui;
